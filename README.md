@@ -22,7 +22,8 @@ npm run dev
 | ------------------- | ------------------------------------------- |
 | `npm run dev`       | dev-сервер з SSR на порту 3000              |
 | `npm run build`     | продакшн-збірка в `dist/`                   |
-| `npm run preview`   | запуск продакшн-збірки локально             |
+| `npm run start`     | запуск продакшн-збірки через Node           |
+| `npm run preview`   | запуск продакшн-збірки через Vite           |
 | `npm run typecheck` | перевірка типів TypeScript                  |
 
 Імітація збою API для перевірки стану помилки:
@@ -46,10 +47,10 @@ cd sklores-orders
 
 CLI ставить: `@tanstack/react-start`, `@tanstack/react-router`, `@tanstack/react-query`, `@tanstack/react-router-ssr-query`, `react`, `react-dom`, `tailwindcss`, `@tailwindcss/vite`, `vite`, `@vitejs/plugin-react`, `typescript`, `@types/react`, `@types/react-dom`, `@types/node`.
 
-2. Поставити UI, форму й валідацію:
+2. Поставити UI, форму, валідацію і Nitro для хостингу:
 
 ```bash
-npm install @mantine/core @mantine/hooks @mantine/form zod
+npm install @mantine/core @mantine/hooks @mantine/form zod nitro
 ```
 
 3. Прибрати devtools, які додав шаблон (вони перекривали шапку і для тестового не потрібні):
@@ -264,7 +265,13 @@ src/
 
 ## Деплой
 
-Ще не задеплоєно. TanStack Start збирається під будь-який хостинг з SSR. Найпростіше: Netlify або Vercel, підключити репозиторій, команда збірки `npm run build`. Для конкретного хостингу CLI вміє додати адаптер (`--deployment netlify|vercel|nitro`). Обмеження сховища в пам'яті на serverless описані вище.
+Для хостингу підключено [Nitro](https://nitro.build/) (`nitro/vite` у `vite.config.ts`). Він сам визначає, де йде збірка: на Vercel створює `.vercel/output` (формат Build Output API), локально `.output/` для запуску через Node.
+
+**Vercel:** імпортувати репозиторій з GitHub, Framework Preset «Other» (або як визначить Vercel), Build Command `npm run build`, поле Output Directory залишити порожнім. Кожен `git push` у `main` запускає новий деплой.
+
+**Свій сервер:** `npm run build`, потім `npm run start` (запускає `node .output/server/index.mjs`, порт через змінну `PORT`).
+
+Обмеження сховища в пам'яті на serverless описані вище: нові замовлення на Vercel можуть зникати між запитами.
 
 ## Тестування
 
