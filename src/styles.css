@@ -1,0 +1,520 @@
+@layer theme, base, mantine, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import '@mantine/core/styles.layer.css';
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@custom-variant dark (&:where([data-mantine-color-scheme='dark'], [data-mantine-color-scheme='dark'] *));
+
+@layer components {
+  :root {
+    --paper: #fbf6ee;
+    --paper-raised: #fffdf9;
+    --paper-sunken: #f3ece0;
+    --ink: #2e2a33;
+    --ink-soft: #6e6777;
+    --line: #2e2a33;
+    --stroke: #2e2a33;
+    --mint: #c8eed8;
+    --mint-ink: #1d6b45;
+    --peach: #ffdcc4;
+    --peach-ink: #94451a;
+    --lavender: #e3ddff;
+    --lavender-ink: #4a3c9c;
+    --butter: #fff0b0;
+    --butter-ink: #7a5800;
+    --rose: #ffd6d6;
+    --rose-ink: #9b2c2c;
+    --pencil: #2e2a33;
+    --wobbly: 18px 14px 20px 12px / 12px 20px 14px 18px;
+    --wobbly-small: 12px 9px 13px 8px / 8px 13px 9px 12px;
+    --sticker: 3px 3px 0 var(--line);
+    --sticker-lifted: 5px 5px 0 var(--line);
+    --sticker-pressed: 1px 1px 0 var(--line);
+    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --mantine-color-body: var(--paper);
+    --mantine-color-text: var(--ink);
+    --mantine-color-dimmed: var(--ink-soft);
+    --mantine-color-placeholder: var(--ink-soft);
+    --mantine-color-anchor: var(--mint-ink);
+  }
+
+  :root[data-mantine-color-scheme='dark'] {
+    --paper: #1f1d25;
+    --paper-raised: #292731;
+    --paper-sunken: #18171d;
+    --ink: #f4eee5;
+    --ink-soft: #aaa2b4;
+    --line: #0d0c10;
+    --stroke: #5d5868;
+    --mint: #2c5a44;
+    --mint-ink: #c8eed8;
+    --peach: #5e3c28;
+    --peach-ink: #ffdcc4;
+    --lavender: #3e3769;
+    --lavender-ink: #e3ddff;
+    --butter: #574a1c;
+    --butter-ink: #fff0b0;
+    --rose: #5a2c2f;
+    --rose-ink: #ffd6d6;
+    --pencil: #f4eee5;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--butter);
+    color: var(--butter-ink);
+  }
+
+  .hand {
+    font-family: Caveat, cursive;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .sticker {
+    background: var(--paper-raised);
+    border: 2px solid var(--stroke);
+    border-radius: var(--wobbly);
+    box-shadow: var(--sticker);
+  }
+
+  .sticker-button {
+    border: 2px solid var(--stroke);
+    border-radius: var(--wobbly-small);
+    box-shadow: var(--sticker);
+    background: var(--paper-raised);
+    color: var(--ink);
+    transition:
+      transform 180ms var(--spring),
+      box-shadow 180ms var(--spring),
+      background-color 150ms ease;
+  }
+
+  .sticker-button:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: var(--sticker-lifted);
+  }
+
+  .sticker-button:active {
+    transform: translate(2px, 2px) scale(0.97);
+    box-shadow: var(--sticker-pressed);
+  }
+
+  .mantine-Button-root {
+    font-weight: 800;
+    border: 2px solid var(--stroke);
+    border-radius: var(--wobbly-small);
+    box-shadow: var(--sticker);
+    background: var(--paper-raised);
+    color: var(--ink);
+    transition:
+      transform 180ms var(--spring),
+      box-shadow 180ms var(--spring),
+      background-color 150ms ease;
+  }
+
+  .mantine-Button-root:where([data-variant='filled']) {
+    background: var(--mint);
+    color: var(--mint-ink);
+  }
+
+  .mantine-Button-root:where([data-variant='danger']) {
+    background: var(--rose);
+    color: var(--rose-ink);
+  }
+
+  .mantine-Button-root:hover {
+    background: var(--paper-raised);
+    transform: translate(-1px, -1px);
+    box-shadow: var(--sticker-lifted);
+  }
+
+  .mantine-Button-root:where([data-variant='filled']):hover {
+    background: var(--mint);
+  }
+
+  .mantine-Button-root:where([data-variant='danger']):hover {
+    background: var(--rose);
+  }
+
+  .mantine-Button-root:active {
+    transform: translate(2px, 2px) scale(0.97);
+    box-shadow: var(--sticker-pressed);
+  }
+
+  .mantine-Input-input {
+    background: var(--paper-raised);
+    color: var(--ink);
+    border: 2px solid var(--stroke);
+    border-radius: var(--wobbly-small);
+    font-weight: 600;
+    transition:
+      box-shadow 180ms var(--spring),
+      transform 180ms var(--spring);
+  }
+
+  .mantine-Input-input:focus,
+  .mantine-Input-input:focus-within {
+    border-color: var(--stroke);
+    box-shadow: var(--sticker);
+    transform: translate(-1px, -1px);
+  }
+
+  .mantine-Input-input[data-error] {
+    border-color: var(--rose-ink);
+    background: var(--rose);
+    color: var(--rose-ink);
+  }
+
+  .mantine-Input-input[data-error]::placeholder {
+    color: var(--rose-ink);
+    opacity: 0.6;
+  }
+
+  .mantine-InputWrapper-label {
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .mantine-InputWrapper-description {
+    font-weight: 600;
+    color: var(--mint-ink);
+  }
+
+  .mantine-InputWrapper-error {
+    font-weight: 700;
+    color: var(--rose-ink);
+    animation: wiggle 360ms ease;
+  }
+
+  .mantine-Combobox-dropdown,
+  .mantine-Select-dropdown {
+    background: var(--paper-raised);
+    border: 2px solid var(--stroke);
+    border-radius: var(--wobbly-small);
+    box-shadow: var(--sticker);
+  }
+
+  .mantine-Combobox-option {
+    font-weight: 600;
+    border-radius: 10px;
+  }
+
+  .mantine-Combobox-option[data-combobox-selected] {
+    background: var(--mint);
+    color: var(--mint-ink);
+  }
+
+  .mantine-NumberInput-control {
+    color: var(--ink);
+    border-color: var(--stroke);
+  }
+
+  .mantine-Skeleton-root::after {
+    background: var(--paper-sunken);
+  }
+
+  .orders-grid {
+    display: grid;
+    grid-template-columns: 5.5rem 6.5rem minmax(0, 1fr) 8.5rem 5rem 10rem;
+    align-items: center;
+    column-gap: 1rem;
+  }
+
+  .order-row-body {
+    box-shadow: var(--sticker);
+    transition:
+      transform 260ms var(--spring),
+      box-shadow 260ms var(--spring),
+      background-color 200ms ease;
+  }
+
+  .order-row:hover .order-row-body,
+  .order-row:focus-within .order-row-body {
+    transform: translate(-2px, -2px) rotate(-0.25deg);
+    box-shadow: var(--sticker-lifted);
+  }
+
+  .order-row:active .order-row-body {
+    transform: translate(1px, 1px);
+    box-shadow: var(--sticker-pressed);
+  }
+
+  .order-row-body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--row-fill);
+    clip-path: inset(0 100% 0 0 round 0 40px 40px 0);
+    transition: clip-path 260ms ease-in;
+  }
+
+  .order-row:hover .order-row-body::before,
+  .order-row:focus-within .order-row-body::before {
+    clip-path: inset(0 0 0 0 round 0);
+    transition: clip-path 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .sort-arrow {
+    display: inline-block;
+    transition:
+      transform 320ms var(--spring),
+      opacity 200ms ease;
+  }
+
+  @media (max-width: 639px) {
+    .order-row-body.orders-grid {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        'id status'
+        'client client'
+        'date total'
+        'items total';
+      row-gap: 4px;
+    }
+
+    .order-cell-id {
+      grid-area: id;
+    }
+
+    .order-cell-status {
+      grid-area: status;
+      justify-self: end;
+    }
+
+    .order-cell-client {
+      grid-area: client;
+    }
+
+    .order-cell-date {
+      grid-area: date;
+    }
+
+    .order-cell-items {
+      grid-area: items;
+    }
+
+    .order-cell-total {
+      grid-area: total;
+      align-self: end;
+    }
+  }
+
+  .items-table {
+    --table-border-color: color-mix(in srgb, var(--stroke) 22%, transparent);
+    font-weight: 600;
+  }
+
+  .items-table thead th {
+    font-weight: 800;
+    color: var(--ink-soft);
+    background: var(--paper-sunken);
+  }
+
+  .items-table tbody tr {
+    transition: background-color 180ms ease;
+  }
+
+  .items-table tbody tr:hover {
+    background: color-mix(in srgb, var(--butter) 55%, transparent);
+  }
+
+  .items-table tfoot td {
+    background: var(--paper-sunken);
+    border-top: 2px solid var(--stroke);
+  }
+
+  .pencil-spinner {
+    animation: spin-wobbly 900ms cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+  }
+
+  @keyframes spin-wobbly {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .skeleton-row {
+    animation: skeleton-breathe 1.4s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-breathe {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .doodle-draw path,
+  .doodle-draw circle,
+  .doodle-draw line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-in 900ms ease forwards;
+  }
+
+  .doodle-draw > :first-child {
+    animation:
+      draw-in 900ms ease forwards,
+      fill-in 500ms ease 450ms both;
+  }
+
+  @keyframes fill-in {
+    from {
+      fill-opacity: 0;
+    }
+  }
+
+  .doodle-draw > :nth-child(2) {
+    animation-delay: 250ms;
+  }
+
+  .doodle-draw > :nth-child(3) {
+    animation-delay: 450ms;
+  }
+
+  .doodle-draw > :nth-child(4) {
+    animation-delay: 600ms;
+  }
+
+  .doodle-draw > :nth-child(5) {
+    animation-delay: 750ms;
+  }
+
+  .float-gently {
+    animation: float-gently 3.2s ease-in-out infinite;
+  }
+
+  .pop-in {
+    animation: pop-in 380ms var(--spring) both;
+  }
+
+  .bump {
+    display: inline-block;
+    animation: bump 320ms var(--spring);
+  }
+
+  .rise-in {
+    animation: rise-in 420ms ease both;
+  }
+
+  .app-loading-line-pencil {
+    animation: pencil-slide 1.1s ease-in-out infinite;
+  }
+
+  @keyframes pencil-slide {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(300%);
+    }
+  }
+
+  .status-dot-pulse {
+    animation: status-pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes status-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.55;
+    }
+  }
+
+  @keyframes draw-in {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes float-gently {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+      transform: translateY(-6px) rotate(2deg);
+    }
+  }
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.94) translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes bump {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.12) rotate(-2deg);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-3px);
+    }
+    75% {
+      transform: translateX(3px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 1ms !important;
+      animation-delay: 0ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important;
+    }
+  }
+}
